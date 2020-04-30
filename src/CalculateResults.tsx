@@ -1,6 +1,11 @@
 import React from 'react';
 import {LoanStoreState} from "./LoanStore";
 import {observer} from "mobx-react";
+import {List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+
 
 export interface CalculateResultsProps {
   loanState: LoanStoreState;
@@ -13,7 +18,7 @@ export const CalculateResults = observer((props: CalculateResultsProps) => {
   const calculatedPayments = props.loanState.years * 12;
 
   if (!principal || !calculateInterest || !calculatedPayments) {
-    return <div>not enough data to calculate</div>
+    return <></>
   }
 
   //Compute monthly Payment
@@ -30,10 +35,27 @@ export const CalculateResults = observer((props: CalculateResultsProps) => {
 
   const totalPayment = (monthly * calculatedPayments).toFixed(2);
   return (
-    <>
-      <div>{`$` + monthlyPayment}</div>
-      <div>{`%` + totalInterest}</div>
-      <div>{totalPayment}</div>
-    </>
-  )
-});
+      <div>
+        <List component="nav" aria-label="main mailbox folders">
+          <ListItem button>
+            <ListItemIcon>
+              <AttachMoneyIcon style={{color: "#009688"}} />
+            </ListItemIcon>
+            <ListItemText primary={'Monthly payment: ' + monthlyPayment}/>
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <TrendingUpIcon style={{color: "#009688"}}/>
+            </ListItemIcon>
+            <ListItemText primary={'Total percent: ' + totalInterest + ' %'} />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <MonetizationOnIcon style={{color: "#009688"}} />
+            </ListItemIcon>
+            <ListItemText primary={'Total amount: ' + totalPayment} />
+          </ListItem>
+        </List>
+      </div>
+      );
+      });

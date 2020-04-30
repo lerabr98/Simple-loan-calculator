@@ -13,22 +13,13 @@ export const LoanForm = observer((props: LoanFormProps) => {
   const interestRateChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => props.onChange('interestRate', parseFloat(e.target.value));
   const yearsChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => props.onChange('years', parseFloat(e.target.value));
   return (
-      <div id="loan-form">
+      <Box id="loan-form">
           <div>
               <TextField
                   value={props.formState.amount}
                   onChange={amountChangeHandler}
                   label="Loan Amount"
-                  style={{margin: "20px"}}
-                  variant="outlined"
-              />
-          </div>
-          <div>
-              <TextField
-                  value={props.formState.interestRate}
-                  onChange={interestRateChangeHandler}
-                  label="Years"
-                  style={{margin: "20px"}}
+                  style={{margin: "50px 50px 5px"}}
                   variant="outlined"
               />
           </div>
@@ -37,10 +28,19 @@ export const LoanForm = observer((props: LoanFormProps) => {
                   value={props.formState.years}
                   onChange={yearsChangeHandler}
                   label="Percent"
-                  style={{margin: "20px"}}
+                  style={{margin: "50px 50px 5px"}}
                   variant="outlined"
               />
           </div>
-      </div>
+          <div>
+              <TextField
+                  value={props.formState.interestRate}
+                  onChange={interestRateChangeHandler}
+                  label="Years"
+                  style={{margin: "50px 50px 5px"}}
+                  variant="outlined"
+              />
+          </div>
+      </Box>
   )
 });
